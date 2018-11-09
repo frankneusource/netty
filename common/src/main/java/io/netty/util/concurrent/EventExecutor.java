@@ -16,6 +16,8 @@
 package io.netty.util.concurrent;
 
 /**
+ * 事件执行器，它是一个只使用一个线程来执行任务的特殊线程池，其扩展了	EventExecutorGroup，主要是为了方便代理EventExecutorGroup中的方法；
+ * 此外，EventExecutor中也定义一些自己的API，如：用于识别线程身份的方法inEventLoop，创建各种通知器Promise的方法。
  * The {@link EventExecutor} is a special {@link EventExecutorGroup} which comes
  * with some handy methods to see if a {@link Thread} is executed in a event loop.
  * Besides this, it also extends the {@link EventExecutorGroup} to allow for a generic

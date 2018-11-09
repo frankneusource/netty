@@ -19,6 +19,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
+ * EventExecutorGroup的默认实现，当需要使用DefaultEventExecutor来执行任务时，可使用该实现，比较少用。
  * Default implementation of {@link MultithreadEventExecutorGroup} which will use {@link DefaultEventExecutor} instances
  * to handle the tasks.
  */

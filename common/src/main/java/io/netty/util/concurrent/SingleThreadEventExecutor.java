@@ -43,6 +43,10 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 /**
+ * 一个可执行普通任务和调度任务的单线程执行器，也就是说，提交到该线程池的所有任务都有同一个线程来完成。
+ * 内部具有一个阻塞队列用于保存所有提交到该执行器的任务。
+ * 同时，其扩展了OrderedEventExecutor，表明需要按顺序串行执行所有提交的任务，这里体现了Netty无锁化设计。
+ * 即使如此，由于它还没有和特定的Selector绑定，因此不能执行I/O相关的操作。
  * Abstract base class for {@link OrderedEventExecutor}'s that execute all its submitted tasks in a single thread.
  *
  */

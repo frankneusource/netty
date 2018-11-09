@@ -31,6 +31,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
+ * 扩展自MultithreadEventLoopGroup，定义NIO的独特实现，主要实现了newChild方法。对于用户，代码中使用较多的也就NioEventLoopGroup了。
  * {@link MultithreadEventLoopGroup} implementations which is used for NIO {@link Selector} based {@link Channel}s.
  */
 public class NioEventLoopGroup extends MultithreadEventLoopGroup {

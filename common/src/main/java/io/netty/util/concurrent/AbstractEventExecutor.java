@@ -28,6 +28,10 @@ import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * EventExecutor的抽象实现，其实现了EventExecutorGroup中的抽象方法，提交任务的方法委托给父类AbstractExecutorService来完成
+ * 但不支持提交调度任务，调用schedule相关方法都会抛出UnsupportedOperationException。
+ * 此外，为了实现iterator，其内部定义了一个只能包含一个元素的Collection，且这个元素就是当前EventExecutor实例，因此迭代AbstractEventExecutor只会返回自身实例。
+ * 用户可直接调用next方法，默认也是返回当前EventExecutor实例，更方便快捷。
  * Abstract base class for {@link EventExecutor} implementations.
  */
 public abstract class AbstractEventExecutor extends AbstractExecutorService implements EventExecutor {

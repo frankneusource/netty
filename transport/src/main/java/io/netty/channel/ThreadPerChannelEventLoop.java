@@ -16,6 +16,8 @@
 package io.netty.channel;
 
 /**
+ * 主要用于Oio的EventLoop实现，一个EventLoop只处理一个Channel的I/O操作。
+ * OIO意义：线程发起IO请求，不管内核是否准备好IO操作，从发起请求起，线程一直阻塞，直到操作完成。
  * {@link SingleThreadEventLoop} which is used to handle OIO {@link Channel}'s. So in general there will be
  * one {@link ThreadPerChannelEventLoop} per {@link Channel}.
  *

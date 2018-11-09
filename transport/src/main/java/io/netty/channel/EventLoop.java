@@ -18,6 +18,10 @@ package io.netty.channel;
 import io.netty.util.concurrent.OrderedEventExecutor;
 
 /**
+ * 一旦与Channel绑定，将处理该Channel上的所有I/O操作。
+ * EventLoop可同时处理多个Channel中I/O操作，也可以只处理一个Channel上的I/O操作，具体由不同网络I/O确定。
+ * 如Oio只能处理单个Channel的I/O操作，NIO则可以处理多个Channel的I/O操作。
+ * EventLoop所有子类都将顺序串行执行任务，因为其扩展了OrderedEventExecutor。
  * Will handle all the I/O operations for a {@link Channel} once registered.
  *
  * One {@link EventLoop} instance will usually handle more than one {@link Channel} but this may depend on

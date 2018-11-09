@@ -25,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * EventExecutorGroup的抽象实现，内部组合了多个EventExecutor用于对外提供服务，并负责管理一组EventExecutor实例。
+ * 它还提供了抽象方法newChild用于构造EventExecutor实例，由子类提供实现，便于构造定制化的EventExecutor。
+ * 它还聚合了一个EventExecutorChooser对象，用于定制通过next从数组中选择EventExecutor对象的规则。
  * Abstract base class for {@link EventExecutorGroup} implementations that handles their tasks with multiple threads at
  * the same time.
  */

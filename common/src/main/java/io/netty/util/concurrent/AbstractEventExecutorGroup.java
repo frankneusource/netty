@@ -27,6 +27,8 @@ import static io.netty.util.concurrent.AbstractEventExecutor.*;
 
 
 /**
+ * EventExecutorGroup的抽象实现，并没有提供新的API，只是简单的为EventExecutorGroup中定义的方法提供了默认实现。
+ * EventExecutorGroup本身并不能执行任务，它首先通过next()选择一个EventExecutor对象，然后将执行任务的工作都是委托给这个对象。换句话说，具体实现由EventExecutor的子类来完成。
  * Abstract base class for {@link EventExecutorGroup} implementations.
  */
 public abstract class AbstractEventExecutorGroup implements EventExecutorGroup {

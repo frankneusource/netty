@@ -22,6 +22,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 字面含义是事件执行器组，管理着一组EventExecutor，负责通过其next()方法提供EventExecutor的使用，并负责管理这些EventExecutor的生命周期。E
+ * ventExecutorGroup扩展了JDK的ScheduledExecutorService，使得其子类具有提交执行调度任务的能力；同时还扩展了Iterable，说明EventExecutorGroup是可迭代的。此外，EventExecutorGroup还定义了优雅退出的方法。
  * The {@link EventExecutorGroup} is responsible for providing the {@link EventExecutor}'s to use
  * via its {@link #next()} method. Besides this, it is also responsible for handling their
  * life-cycle and allows shutting them down in a global fashion.

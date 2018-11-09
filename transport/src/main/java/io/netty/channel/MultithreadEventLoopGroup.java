@@ -27,6 +27,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
+ * EventLoopGroup的抽象实现，初始化时会确认用于IO操作的EventLoop线程数量，默认值是处理器个数的2倍。
+ * 从EventLoopGroup继承的register方法主要委托给next返回的EventLoop来完成。
+ * 同时还扩展了MultithreadEventExecutorGroup，这样从EventExecutorGroup继承的方法都得到默认实现，但从MultithreadEventExecutorGroup中继承的newChild没有默认实现，它需要由由最终子类来实现。
  * Abstract base class for {@link EventLoopGroup} implementations that handles their tasks with multiple threads at
  * the same time.
  */

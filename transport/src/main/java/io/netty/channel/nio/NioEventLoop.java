@@ -48,6 +48,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ * NIO实现，内部聚合了Java Selector，使得EventLoop成为一个真正意义的Reactor线程。
+ * 内部除了实现Selector相关的一些操作，同时实现了执行任务的核心逻辑run方法。
  * {@link SingleThreadEventLoop} implementation which register the {@link Channel}'s to a
  * {@link Selector} and so does the multi-plexing of these in the event loop.
  *

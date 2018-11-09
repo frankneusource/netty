@@ -26,6 +26,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * EventExecutor的抽象实现，主要为了支持调度任务的执行。
+ * 其持有一个PriorityQueue用于存放调度任务，并实现了ScheduledExecutorService中定义的提交调度任务的方法。
  * Abstract base class for {@link EventExecutor}s that want to support scheduling.
  */
 public abstract class AbstractScheduledEventExecutor extends AbstractEventExecutor {

@@ -19,6 +19,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
+ * 用于只能用于本地传输的EventLoop实现。
  * {@link MultithreadEventLoopGroup} which must be used for the local transport.
  */
 public class DefaultEventLoopGroup extends MultithreadEventLoopGroup {

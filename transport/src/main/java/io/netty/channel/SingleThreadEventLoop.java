@@ -27,6 +27,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
 /**
+ * EventLoop的抽象实现，同时扩展了SingleThreadEventExecutor，负责用单个线程来执行所有提交到当前EventLoop的任务。
+ * SingleThreadEventLoop内部持有一个tailTasks队列，存放暂时无法处理的task。SingleThreadEventLoop中主要实现了register相关方法。不同网络I/O类型通过扩展该类来完成底层实现。
  * Abstract base class for {@link EventLoop}s that execute all its submitted tasks in a single thread.
  *
  */
