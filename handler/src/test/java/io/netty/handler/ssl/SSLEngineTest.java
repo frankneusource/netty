@@ -63,6 +63,7 @@ import java.security.KeyStore;
 import java.security.Provider;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -82,6 +83,7 @@ import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.SSLParameters;
 import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.TrustManagerFactorySpi;
@@ -967,7 +969,7 @@ public abstract class SSLEngineTest {
                 ch.config().setAllocator(new TestByteBufAllocator(ch.config().getAllocator(), type));
 
                 ChannelPipeline p = ch.pipeline();
-                SSLEngine engine = serverSslCtx.newEngine(ch.alloc());
+                SSLEngine engine = wrapEngine(serverSslCtx.newEngine(ch.alloc()));
                 engine.setUseClientMode(false);
                 engine.setNeedClientAuth(true);
 
@@ -1677,7 +1679,7 @@ public abstract class SSLEngineTest {
             @Override
             protected void initChannel(Channel ch) throws Exception {
                 ch.config().setAllocator(new TestByteBufAllocator(ch.config().getAllocator(), type));
-                ch.pipeline().addLast(new SslHandler(clientSslCtx.newEngine(ch.alloc())));
+                ch.pipeline().addLast(new SslHandler(wrapEngine(clientSslCtx.newEngine(ch.alloc()))));
             }
 
         }).connect(serverChannel.localAddress()).syncUninterruptibly().channel();
@@ -2634,6 +2636,28 @@ public abstract class SSLEngineTest {
             cleanupClientSslEngine(client);
             cleanupServerSslEngine(server);
             cert.delete();
+        }
+    }
+
+    @Test
+    public void testInvalidCipher() throws Exception {
+        SelfSignedCertificate cert = new SelfSignedCertificate();
+        List<String> cipherList = new ArrayList<String>();
+        Collections.addAll(cipherList, ((SSLSocketFactory) SSLSocketFactory.getDefault()).getDefaultCipherSuites());
+        cipherList.add("InvalidCipher");
+        SSLEngine server = null;
+        try {
+            serverSslCtx = SslContextBuilder.forServer(cert.key(), cert.cert()).sslProvider(sslClientProvider())
+                                            .ciphers(cipherList).build();
+            server = wrapEngine(serverSslCtx.newEngine(UnpooledByteBufAllocator.DEFAULT));
+            fail();
+        } catch (IllegalArgumentException expected) {
+            // expected when invalid cipher is used.
+        } catch (SSLException expected) {
+            // expected when invalid cipher is used.
+        } finally {
+            cert.delete();
+            cleanupServerSslEngine(server);
         }
     }
 
