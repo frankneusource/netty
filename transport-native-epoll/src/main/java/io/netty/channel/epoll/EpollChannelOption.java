@@ -21,8 +21,9 @@ import java.net.InetAddress;
 import java.util.Map;
 
 public final class EpollChannelOption<T> extends UnixChannelOption<T> {
-
+	//禁用NAGLE算法，等待数据达到包传输数据大小上限时发送
     public static final ChannelOption<Boolean> TCP_CORK = valueOf(EpollChannelOption.class, "TCP_CORK");
+    //控制内核缓冲数据，以及缓冲数据的大小
     public static final ChannelOption<Long> TCP_NOTSENT_LOWAT = valueOf(EpollChannelOption.class, "TCP_NOTSENT_LOWAT");
     public static final ChannelOption<Integer> TCP_KEEPIDLE = valueOf(EpollChannelOption.class, "TCP_KEEPIDLE");
     public static final ChannelOption<Integer> TCP_KEEPINTVL = valueOf(EpollChannelOption.class, "TCP_KEEPINTVL");
@@ -32,6 +33,7 @@ public final class EpollChannelOption<T> extends UnixChannelOption<T> {
     public static final ChannelOption<Boolean> IP_FREEBIND = valueOf("IP_FREEBIND");
     public static final ChannelOption<Boolean> IP_TRANSPARENT = valueOf("IP_TRANSPARENT");
     public static final ChannelOption<Boolean> IP_RECVORIGDSTADDR = valueOf("IP_RECVORIGDSTADDR");
+    //一次握手，HTTP/HTTPS时候极大减轻网络代价
     public static final ChannelOption<Integer> TCP_FASTOPEN = valueOf(EpollChannelOption.class, "TCP_FASTOPEN");
     public static final ChannelOption<Boolean> TCP_FASTOPEN_CONNECT =
             valueOf(EpollChannelOption.class, "TCP_FASTOPEN_CONNECT");

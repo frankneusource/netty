@@ -20,6 +20,7 @@ import io.netty.util.ReferenceCounted;
 import io.netty.util.internal.UnstableApi;
 
 /**
+ * 指定ssl的实现方式，建议使用OPENSSL
  * An enumeration of SSL/TLS protocol providers.
  */
 public enum SslProvider {

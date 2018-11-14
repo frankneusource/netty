@@ -66,6 +66,7 @@ public final class EpollSocketChannel extends AbstractEpollStreamChannel impleme
     }
 
     /**
+	 * 获取FD的统计信息
      * Returns the {@code TCP_INFO} for the current socket. See <a href="http://linux.die.net/man/7/tcp">man 7 tcp</a>.
      */
     public EpollTcpInfo tcpInfo() {
