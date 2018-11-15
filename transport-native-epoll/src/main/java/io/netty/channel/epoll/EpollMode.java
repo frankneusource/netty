@@ -21,6 +21,8 @@ package io.netty.channel.epoll;
 public enum EpollMode {
 
     /**
+	 *
+	 * 边缘触发，只要满足条件，就触发一个事件(只要有数据没有被获取，内核就不断通知你)
      * Use {@code EPOLLET} (edge-triggered).
      *
      * @see <a href="http://linux.die.net/man/7/epoll">man 7 epoll</a>.
@@ -28,6 +30,7 @@ public enum EpollMode {
     EDGE_TRIGGERED,
 
     /**
+	 * 条件触发，每当状态变化时，触发一个事件，如果设置AutoRead做流控，由于AutoRead在epoll的边缘触发模式下失效，在建立连接的需要确认使用水平触发模式。
      * Do not use {@code EPOLLET} (level-triggered).
      *
      * @see <a href="http://linux.die.net/man/7/epoll">man 7 epoll</a>.
