@@ -238,7 +238,12 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
             };
         }
 
-        @Override
+		/**
+		 * 处理Accept事件的handler，在这里处理accept事件
+		 * @param ctx
+		 * @param msg
+		 */
+		@Override
         @SuppressWarnings("unchecked")
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
             final Channel child = (Channel) msg;
